@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CodeAtlas</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f7f8fc; }
+    body { margin: 0; } main { max-width: 1100px; margin: auto; padding: 2rem; }
+    header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    h1 { margin: 0; } p { color: #526075; } #diagram { background: white; border: 1px solid #dbe1eb; border-radius: 12px; min-height: 420px; padding: 1rem; overflow: auto; }
+    input, button { font: inherit; } button { background: #1e40af; border: 0; color: white; border-radius: 6px; padding: .55rem .8rem; cursor: pointer; }
+    #status { font-size: .9rem; } .legend { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <main>
+    <header><div><h1>CodeAtlas</h1><p>Click a node to expand or collapse its direct children.</p></div><input id="file" type="file" accept="application/json"></header>
+    <p id="status">Loading <code>graph.json</code>… <span class="legend">Red outline = bottleneck heuristic.</span></p>
+    <div id="diagram" aria-label="Code architecture diagram"></div>
+  </main>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "base", themeVariables: { primaryColor: "#e8eefc", primaryBorderColor: "#1e40af", lineColor: "#64748b" } });
+    const diagram = document.querySelector("#diagram"), status = document.querySelector("#status"), expanded = new Set();
+    let graph, nodes, aliases;
+    const escape = value => String(value).replace(/["\[\]]/g, " ");
+    const source = () => {
+      const visible = new Set([...nodes.values()].filter(n => n.type === "module").map(n => n.id));
+      expanded.forEach(id => (nodes.get(id)?.children || []).forEach(child => visible.add(child)));
+      const ids = [...visible].sort(); aliases = new Map(ids.map((id, index) => [id, `n${index}`]));
+      const lines = ["flowchart TD"];
+      ids.forEach(id => { const n = nodes.get(id); lines.push(`${aliases.get(id)}["${escape(n.label)}"]`); if (n.bottlenecks.length) lines.push(`style ${aliases.get(id)} fill:#fff1f1,stroke:#dc2626,stroke-width:2px`); lines.push(`click ${aliases.get(id)} toggleNode "Expand or collapse"`); });
+      ids.forEach(id => (nodes.get(id).children || []).filter(child => aliases.has(child)).forEach(child => lines.push(`${aliases.get(id)} --> ${aliases.get(child)}`)));
+      graph.edges.filter(edge => aliases.has(edge.from) && aliases.has(edge.to)).forEach(edge => lines.push(`${aliases.get(edge.from)} -. ${edge.type} .-> ${aliases.get(edge.to)}`));
+      return lines.join("\n");
+    };
+    const render = async () => {
+      const result = await mermaid.render("codeatlas", source()); diagram.innerHTML = result.svg; result.bindFunctions?.(diagram);
+      status.firstChild.textContent = `${graph.meta.repo}: ${nodes.size} nodes. `;
+    };
+    window.toggleNode = id => { const node = [...aliases.entries()].find(([, alias]) => alias === id)?.[0]; if (!node) return; expanded.has(node) ? expanded.delete(node) : expanded.add(node); render(); };
+    const load = async data => { graph = JSON.parse(data); nodes = new Map(graph.nodes.map(node => [node.id, node])); await render(); };
+    document.querySelector("#file").addEventListener("change", event => event.target.files[0]?.text().then(load));
+    const graphFile = new URLSearchParams(location.search).get("graph") || "graph.json";
+    fetch(graphFile).then(response => response.ok ? response.text() : Promise.reject()).then(load).catch(() => { status.firstChild.textContent = "Choose a generated graph.json to view it. "; });
+  </script>
+</body>
+</html>

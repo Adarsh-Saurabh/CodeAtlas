@@ -1,0 +1,3645 @@
+{
+  "nodes": [
+    {
+      "id": "2dcnn",
+      "type": "module",
+      "label": "2dcnn",
+      "file": "2dcnn.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "2dcnn.plot_history",
+        "2dcnn.save_history",
+        "2dcnn.loaddata",
+        "2dcnn.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "2dcnn.plot_history",
+      "type": "function",
+      "label": "plot_history",
+      "file": "2dcnn.py",
+      "line": 19,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.plot",
+        "plt.title",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.grid",
+        "plt.legend",
+        "plt.savefig",
+        "os.path.join",
+        "plt.close"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "2dcnn.save_history",
+      "type": "function",
+      "label": "save_history",
+      "file": "2dcnn.py",
+      "line": 41,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "len",
+        "open",
+        "os.path.join",
+        "fp.write",
+        "range",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "2dcnn.loaddata",
+      "type": "function",
+      "label": "loaddata",
+      "file": "2dcnn.py",
+      "line": 55,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "os.listdir",
+        "tqdm.tqdm",
+        "len",
+        "os.path.join",
+        "vid3d.get_UCF_classname",
+        "labellist.append",
+        "labels.append",
+        "X.append",
+        "vid3d.video3d",
+        "pbar.update",
+        "pbar.close",
+        "open",
+        "range",
+        "fp.write",
+        "format",
+        "enumerate",
+        "np.array"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "vid3d.get_UCF_classname inside a loop at line 68"
+        }
+      ]
+    },
+    {
+      "id": "2dcnn.main",
+      "type": "function",
+      "label": "main",
+      "file": "2dcnn.py",
+      "line": 90,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "videoto3d.Videoto3D",
+        "loaddata",
+        "x.reshape",
+        "max",
+        "np_utils.to_categorical",
+        "X.astype",
+        "print",
+        "format",
+        "keras.models.Sequential",
+        "model.add",
+        "keras.layers.Convolution2D",
+        "keras.layers.Activation",
+        "keras.layers.MaxPooling2D",
+        "keras.layers.Dropout",
+        "keras.layers.Flatten",
+        "keras.layers.Dense",
+        "model.compile",
+        "model.summary",
+        "keras.utils.vis_utils.plot_model",
+        "os.path.join",
+        "sklearn.cross_validation.train_test_split",
+        "model.fit",
+        "model.to_json",
+        "open",
+        "json_file.write",
+        "model.save_weights",
+        "model.evaluate",
+        "plot_history",
+        "save_history"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn",
+      "type": "module",
+      "label": "3dcnn",
+      "file": "3dcnn.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "3dcnn.plot_history",
+        "3dcnn.save_history",
+        "3dcnn.loaddata",
+        "3dcnn.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn.plot_history",
+      "type": "function",
+      "label": "plot_history",
+      "file": "3dcnn.py",
+      "line": 23,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.plot",
+        "plt.title",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.grid",
+        "plt.legend",
+        "plt.savefig",
+        "os.path.join",
+        "plt.close"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn.save_history",
+      "type": "function",
+      "label": "save_history",
+      "file": "3dcnn.py",
+      "line": 45,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "len",
+        "open",
+        "os.path.join",
+        "fp.write",
+        "range",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn.loaddata",
+      "type": "function",
+      "label": "loaddata",
+      "file": "3dcnn.py",
+      "line": 59,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "os.listdir",
+        "tqdm.tqdm",
+        "len",
+        "pbar.update",
+        "os.path.join",
+        "vid3d.get_UCF_classname",
+        "labellist.append",
+        "labels.append",
+        "X.append",
+        "vid3d.video3d",
+        "pbar.close",
+        "open",
+        "range",
+        "fp.write",
+        "format",
+        "enumerate",
+        "np.array.transpose",
+        "np.array"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "vid3d.get_UCF_classname inside a loop at line 72"
+        }
+      ]
+    },
+    {
+      "id": "3dcnn.main",
+      "type": "function",
+      "label": "main",
+      "file": "3dcnn.py",
+      "line": 95,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "format",
+        "videoto3d.Videoto3D",
+        "os.path.exists",
+        "np.load",
+        "loaddata",
+        "x.reshape",
+        "np_utils.to_categorical",
+        "X.astype",
+        "np.savez",
+        "print",
+        "keras.models.Sequential",
+        "model.add",
+        "keras.layers.Conv3D",
+        "keras.layers.Activation",
+        "keras.layers.MaxPooling3D",
+        "keras.layers.Dropout",
+        "keras.layers.Flatten",
+        "keras.layers.Dense",
+        "model.compile",
+        "keras.optimizers.Adam",
+        "model.summary",
+        "keras.utils.vis_utils.plot_model",
+        "os.path.join",
+        "sklearn.model_selection.train_test_split",
+        "model.fit",
+        "model.evaluate",
+        "model.to_json",
+        "os.path.isdir",
+        "os.makedirs",
+        "open",
+        "json_file.write",
+        "model.save_weights",
+        "plot_history",
+        "save_history"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_batchnorm",
+      "type": "module",
+      "label": "3dcnn_batchnorm",
+      "file": "3dcnn_batchnorm.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "3dcnn_batchnorm.plot_history",
+        "3dcnn_batchnorm.save_history",
+        "3dcnn_batchnorm.loaddata",
+        "3dcnn_batchnorm.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_batchnorm.plot_history",
+      "type": "function",
+      "label": "plot_history",
+      "file": "3dcnn_batchnorm.py",
+      "line": 23,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.plot",
+        "plt.title",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.grid",
+        "plt.legend",
+        "plt.savefig",
+        "os.path.join",
+        "plt.close"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_batchnorm.save_history",
+      "type": "function",
+      "label": "save_history",
+      "file": "3dcnn_batchnorm.py",
+      "line": 45,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "len",
+        "open",
+        "os.path.join",
+        "fp.write",
+        "range",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_batchnorm.loaddata",
+      "type": "function",
+      "label": "loaddata",
+      "file": "3dcnn_batchnorm.py",
+      "line": 59,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "os.listdir",
+        "tqdm.tqdm",
+        "len",
+        "pbar.update",
+        "os.path.join",
+        "vid3d.get_UCF_classname",
+        "labellist.append",
+        "labels.append",
+        "X.append",
+        "vid3d.video3d",
+        "pbar.close",
+        "open",
+        "range",
+        "fp.write",
+        "format",
+        "enumerate",
+        "np.array.transpose",
+        "np.array"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "vid3d.get_UCF_classname inside a loop at line 72"
+        }
+      ]
+    },
+    {
+      "id": "3dcnn_batchnorm.main",
+      "type": "function",
+      "label": "main",
+      "file": "3dcnn_batchnorm.py",
+      "line": 95,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "format",
+        "videoto3d.Videoto3D",
+        "os.path.exists",
+        "np.load",
+        "loaddata",
+        "x.reshape",
+        "np_utils.to_categorical",
+        "X.astype",
+        "print",
+        "keras.models.Sequential",
+        "model.add",
+        "keras.layers.Conv3D",
+        "keras.layers.Activation",
+        "keras.layers.MaxPooling3D",
+        "keras.layers.Dropout",
+        "keras.layers.Flatten",
+        "keras.layers.Dense",
+        "keras.layers.BatchNormalization",
+        "model.compile",
+        "model.summary",
+        "keras.utils.vis_utils.plot_model",
+        "os.path.join",
+        "sklearn.model_selection.train_test_split",
+        "model.fit",
+        "model.evaluate",
+        "model.to_json",
+        "os.path.isdir",
+        "os.makedirs",
+        "open",
+        "json_file.write",
+        "model.save_weights",
+        "plot_history",
+        "save_history"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_ensemble",
+      "type": "module",
+      "label": "3dcnn_ensemble",
+      "file": "3dcnn_ensemble.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "3dcnn_ensemble.plot_history",
+        "3dcnn_ensemble.save_history",
+        "3dcnn_ensemble.loaddata",
+        "3dcnn_ensemble.create_3dcnn",
+        "3dcnn_ensemble.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_ensemble.plot_history",
+      "type": "function",
+      "label": "plot_history",
+      "file": "3dcnn_ensemble.py",
+      "line": 21,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.plot",
+        "plt.title",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.grid",
+        "plt.legend",
+        "plt.savefig",
+        "os.path.join",
+        "format",
+        "plt.close"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_ensemble.save_history",
+      "type": "function",
+      "label": "save_history",
+      "file": "3dcnn_ensemble.py",
+      "line": 43,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "len",
+        "open",
+        "os.path.join",
+        "format",
+        "fp.write",
+        "range"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_ensemble.loaddata",
+      "type": "function",
+      "label": "loaddata",
+      "file": "3dcnn_ensemble.py",
+      "line": 57,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "os.listdir",
+        "tqdm.tqdm",
+        "len",
+        "pbar.update",
+        "os.path.join",
+        "vid3d.get_UCF_classname",
+        "labellist.append",
+        "labels.append",
+        "X.append",
+        "vid3d.video3d",
+        "pbar.close",
+        "open",
+        "range",
+        "fp.write",
+        "format",
+        "enumerate",
+        "np.array.transpose",
+        "np.array"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "vid3d.get_UCF_classname inside a loop at line 70"
+        }
+      ]
+    },
+    {
+      "id": "3dcnn_ensemble.create_3dcnn",
+      "type": "function",
+      "label": "create_3dcnn",
+      "file": "3dcnn_ensemble.py",
+      "line": 93,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "keras.models.Sequential",
+        "model.add",
+        "keras.layers.Conv3D",
+        "keras.layers.Activation",
+        "keras.layers.MaxPooling3D",
+        "keras.layers.Dropout",
+        "keras.layers.Flatten",
+        "keras.layers.Dense"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_ensemble.main",
+      "type": "function",
+      "label": "main",
+      "file": "3dcnn_ensemble.py",
+      "line": 117,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "os.path.isdir",
+        "os.makedirs",
+        "videoto3d.Videoto3D",
+        "format",
+        "os.path.exists",
+        "np.load",
+        "loaddata",
+        "x.reshape",
+        "np_utils.to_categorical",
+        "X.astype",
+        "np.savez",
+        "print",
+        "sklearn.cross_validation.train_test_split",
+        "range",
+        "models.append",
+        "create_3dcnn",
+        "compile",
+        "fit",
+        "plot_history",
+        "save_history",
+        "keras.layers.Input",
+        "keras.layers.average",
+        "keras.models.Model",
+        "model.compile",
+        "keras.utils.vis_utils.plot_model",
+        "os.path.join",
+        "model.to_json",
+        "open",
+        "json_file.write",
+        "model.save_weights",
+        "model.evaluate",
+        "f.write"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_leakyrelu",
+      "type": "module",
+      "label": "3dcnn_leakyrelu",
+      "file": "3dcnn_leakyrelu.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "3dcnn_leakyrelu.plot_history",
+        "3dcnn_leakyrelu.save_history",
+        "3dcnn_leakyrelu.loaddata",
+        "3dcnn_leakyrelu.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_leakyrelu.plot_history",
+      "type": "function",
+      "label": "plot_history",
+      "file": "3dcnn_leakyrelu.py",
+      "line": 22,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.plot",
+        "plt.title",
+        "plt.xlabel",
+        "plt.ylabel",
+        "plt.grid",
+        "plt.legend",
+        "plt.savefig",
+        "os.path.join",
+        "plt.close"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_leakyrelu.save_history",
+      "type": "function",
+      "label": "save_history",
+      "file": "3dcnn_leakyrelu.py",
+      "line": 44,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "len",
+        "open",
+        "os.path.join",
+        "fp.write",
+        "range",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "3dcnn_leakyrelu.loaddata",
+      "type": "function",
+      "label": "loaddata",
+      "file": "3dcnn_leakyrelu.py",
+      "line": 58,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "os.listdir",
+        "tqdm.tqdm",
+        "len",
+        "pbar.update",
+        "os.path.join",
+        "vid3d.get_UCF_classname",
+        "labellist.append",
+        "labels.append",
+        "X.append",
+        "vid3d.video3d",
+        "pbar.close",
+        "open",
+        "range",
+        "fp.write",
+        "format",
+        "enumerate",
+        "np.array.transpose",
+        "np.array"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "vid3d.get_UCF_classname inside a loop at line 71"
+        }
+      ]
+    },
+    {
+      "id": "3dcnn_leakyrelu.main",
+      "type": "function",
+      "label": "main",
+      "file": "3dcnn_leakyrelu.py",
+      "line": 94,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "format",
+        "videoto3d.Videoto3D",
+        "os.path.exists",
+        "np.load",
+        "loaddata",
+        "x.reshape",
+        "np_utils.to_categorical",
+        "X.astype",
+        "print",
+        "keras.models.Sequential",
+        "model.add",
+        "keras.layers.Conv3D",
+        "keras.layers.advanced_activations.LeakyReLU",
+        "keras.layers.MaxPooling3D",
+        "keras.layers.Dropout",
+        "keras.layers.Flatten",
+        "keras.layers.Dense",
+        "keras.layers.BatchNormalization",
+        "model.compile",
+        "model.summary",
+        "keras.utils.vis_utils.plot_model",
+        "os.path.join",
+        "sklearn.model_selection.train_test_split",
+        "model.fit",
+        "model.evaluate",
+        "model.to_json",
+        "os.path.isdir",
+        "os.makedirs",
+        "open",
+        "json_file.write",
+        "model.save_weights",
+        "plot_history",
+        "save_history"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "display",
+      "type": "module",
+      "label": "display",
+      "file": "display.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "display.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "display.main",
+      "type": "function",
+      "label": "main",
+      "file": "display.py",
+      "line": 9,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "videoto3d.Videoto3D",
+        "os.listdir",
+        "list",
+        "set",
+        "vid3d.get_UCF_classname",
+        "plt.figure",
+        "print",
+        "find",
+        "plt.subplot",
+        "plt.axis",
+        "vid3d.video3d",
+        "os.path.join",
+        "plt.imshow",
+        "plt.title",
+        "plt.savefig"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "videoto3d",
+      "type": "module",
+      "label": "videoto3d",
+      "file": "videoto3d.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "videoto3d.Videoto3D"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "videoto3d.Videoto3D",
+      "type": "class",
+      "label": "Videoto3D",
+      "file": "videoto3d.py",
+      "line": 5,
+      "confidence": "high",
+      "children": [
+        "videoto3d.Videoto3D.__init__",
+        "videoto3d.Videoto3D.video3d",
+        "videoto3d.Videoto3D.get_UCF_classname"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "videoto3d.Videoto3D.__init__",
+      "type": "function",
+      "label": "__init__",
+      "file": "videoto3d.py",
+      "line": 7,
+      "confidence": "high",
+      "children": [],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "videoto3d.Videoto3D.video3d",
+      "type": "function",
+      "label": "video3d",
+      "file": "videoto3d.py",
+      "line": 12,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "cv2.VideoCapture",
+        "cap.get",
+        "range",
+        "cap.set",
+        "cap.read",
+        "cv2.resize",
+        "framearray.append",
+        "cv2.cvtColor",
+        "cap.release",
+        "np.array"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "videoto3d.Videoto3D.get_UCF_classname",
+      "type": "function",
+      "label": "get_UCF_classname",
+      "file": "videoto3d.py",
+      "line": 35,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "filename.find"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input",
+      "type": "module",
+      "label": "visualize_input",
+      "file": "visualize_input.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "visualize_input.LearningRateAdaptor",
+        "visualize_input.generateInputImage",
+        "visualize_input.deprocess_image",
+        "visualize_input.test_maximized",
+        "visualize_input.save_figure",
+        "visualize_input.main"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.LearningRateAdaptor",
+      "type": "class",
+      "label": "LearningRateAdaptor",
+      "file": "visualize_input.py",
+      "line": 20,
+      "confidence": "high",
+      "children": [
+        "visualize_input.LearningRateAdaptor.__init__",
+        "visualize_input.LearningRateAdaptor.rmsprop",
+        "visualize_input.LearningRateAdaptor.adam"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.LearningRateAdaptor.__init__",
+      "type": "function",
+      "label": "__init__",
+      "file": "visualize_input.py",
+      "line": 22,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "np.zeros"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.LearningRateAdaptor.rmsprop",
+      "type": "function",
+      "label": "rmsprop",
+      "file": "visualize_input.py",
+      "line": 31,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "np.sqrt",
+        "K.epsilon"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.LearningRateAdaptor.adam",
+      "type": "function",
+      "label": "adam",
+      "file": "visualize_input.py",
+      "line": 38,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "np.sqrt",
+        "K.epsilon"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.generateInputImage",
+      "type": "function",
+      "label": "generateInputImage",
+      "file": "visualize_input.py",
+      "line": 50,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "dict",
+        "len",
+        "K.mean",
+        "K.gradients",
+        "K.sqrt",
+        "K.square",
+        "K.epsilon",
+        "K.function",
+        "K.learning_phase",
+        "np.random.random",
+        "LearningRateAdaptor",
+        "K.int_shape",
+        "tqdm.tqdm",
+        "range",
+        "iterate",
+        "adaptor.adam",
+        "test_maximized",
+        "deprocess_image",
+        "save_figure",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.deprocess_image",
+      "type": "function",
+      "label": "deprocess_image",
+      "file": "visualize_input.py",
+      "line": 92,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "x.mean",
+        "x.std",
+        "np.clip",
+        "np.clip.astype"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.test_maximized",
+      "type": "function",
+      "label": "test_maximized",
+      "file": "visualize_input.py",
+      "line": 106,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "model.predict",
+        "print",
+        "format",
+        "np.argmax",
+        "np.max"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.save_figure",
+      "type": "function",
+      "label": "save_figure",
+      "file": "visualize_input.py",
+      "line": 111,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "plt.figure",
+        "fig.add_subplot",
+        "ax.imshow",
+        "ax.axes.get_xaxis.set_visible",
+        "ax.axes.get_xaxis",
+        "ax.axes.get_yaxis.set_visible",
+        "ax.axes.get_yaxis",
+        "fig.savefig",
+        "format"
+      ],
+      "bottlenecks": []
+    },
+    {
+      "id": "visualize_input.main",
+      "type": "function",
+      "label": "main",
+      "file": "visualize_input.py",
+      "line": 121,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "argparse.ArgumentParser",
+        "parser.add_argument",
+        "parser.parse_args",
+        "open",
+        "keras.models.model_from_json",
+        "model_json.read",
+        "model.load_weights",
+        "model.summary",
+        "generateInputImage"
+      ],
+      "bottlenecks": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "2dcnn",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "sklearn.cross_validation",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn",
+      "to": "keras.utils.vis_utils",
+      "type": "imports"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.plot",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.xlabel",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.ylabel",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.grid",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.legend",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.plot_history",
+      "to": "plt.close",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.save_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "labellist.append",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "labels.append",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "X.append",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "pbar.update",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "pbar.close",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "enumerate",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.loaddata",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "loaddata",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "x.reshape",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "max",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "np_utils.to_categorical",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "X.astype",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.models.Sequential",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.add",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.Convolution2D",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.Activation",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.MaxPooling2D",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.Dropout",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.Flatten",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.layers.Dense",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.compile",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.summary",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "keras.utils.vis_utils.plot_model",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "sklearn.cross_validation.train_test_split",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.fit",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.to_json",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "json_file.write",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.save_weights",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "model.evaluate",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "plot_history",
+      "type": "calls"
+    },
+    {
+      "from": "2dcnn.main",
+      "to": "save_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.layers.advanced_activations",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.losses",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.optimizers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "keras.utils.vis_utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "sklearn.model_selection",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.plot",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.xlabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.ylabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.grid",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.legend",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.plot_history",
+      "to": "plt.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.save_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "pbar.update",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "labellist.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "labels.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "X.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "pbar.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "enumerate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "np.array.transpose",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.loaddata",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "os.path.exists",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "np.load",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "loaddata",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "x.reshape",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "np_utils.to_categorical",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "X.astype",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "np.savez",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.models.Sequential",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.add",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.Conv3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.Activation",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.MaxPooling3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.Dropout",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.Flatten",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.layers.Dense",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.compile",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.optimizers.Adam",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.summary",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "keras.utils.vis_utils.plot_model",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "sklearn.model_selection.train_test_split",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.fit",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.evaluate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.to_json",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "os.path.isdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "os.makedirs",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "json_file.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "model.save_weights",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "plot_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn.main",
+      "to": "save_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.layers.advanced_activations",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.losses",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.optimizers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "keras.utils.vis_utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "sklearn.model_selection",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.plot",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.xlabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.ylabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.grid",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.legend",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.plot_history",
+      "to": "plt.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.save_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "pbar.update",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "labellist.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "labels.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "X.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "pbar.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "enumerate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "np.array.transpose",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.loaddata",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "os.path.exists",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "np.load",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "loaddata",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "x.reshape",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "np_utils.to_categorical",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "X.astype",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.models.Sequential",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.add",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.Conv3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.Activation",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.MaxPooling3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.Dropout",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.Flatten",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.Dense",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.layers.BatchNormalization",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.compile",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.summary",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "keras.utils.vis_utils.plot_model",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "sklearn.model_selection.train_test_split",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.fit",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.evaluate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.to_json",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "os.path.isdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "os.makedirs",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "json_file.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "model.save_weights",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "plot_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_batchnorm.main",
+      "to": "save_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "keras.utils.vis_utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "sklearn.cross_validation",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.plot",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.xlabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.ylabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.grid",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.legend",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.plot_history",
+      "to": "plt.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.save_history",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "pbar.update",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "labellist.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "labels.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "X.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "pbar.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "enumerate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "np.array.transpose",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.loaddata",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.models.Sequential",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "model.add",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.Conv3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.Activation",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.MaxPooling3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.Dropout",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.Flatten",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.create_3dcnn",
+      "to": "keras.layers.Dense",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "os.path.isdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "os.makedirs",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "os.path.exists",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "np.load",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "loaddata",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "x.reshape",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "np_utils.to_categorical",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "X.astype",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "np.savez",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "sklearn.cross_validation.train_test_split",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "models.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "create_3dcnn",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "compile",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "fit",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "plot_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "save_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "keras.layers.Input",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "keras.layers.average",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "keras.models.Model",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "model.compile",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "keras.utils.vis_utils.plot_model",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "model.to_json",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "json_file.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "model.save_weights",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "model.evaluate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_ensemble.main",
+      "to": "f.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.layers.advanced_activations",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.losses",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.optimizers",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "keras.utils.vis_utils",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "sklearn.model_selection",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.plot",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.xlabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.ylabel",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.grid",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.legend",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.plot_history",
+      "to": "plt.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.save_history",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "pbar.update",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "labellist.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "labels.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "X.append",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "pbar.close",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "fp.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "enumerate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "np.array.transpose",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.loaddata",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "os.path.exists",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "np.load",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "loaddata",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "x.reshape",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "np_utils.to_categorical",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "X.astype",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.models.Sequential",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.add",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.Conv3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.advanced_activations.LeakyReLU",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.MaxPooling3D",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.Dropout",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.Flatten",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.Dense",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.layers.BatchNormalization",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.compile",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.summary",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "keras.utils.vis_utils.plot_model",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "sklearn.model_selection.train_test_split",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.fit",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.evaluate",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.to_json",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "os.path.isdir",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "os.makedirs",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "json_file.write",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "model.save_weights",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "plot_history",
+      "type": "calls"
+    },
+    {
+      "from": "3dcnn_leakyrelu.main",
+      "to": "save_history",
+      "type": "calls"
+    },
+    {
+      "from": "display",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "display",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "display",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "display",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "display",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "display.main",
+      "to": "videoto3d.Videoto3D",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "os.listdir",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "list",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "set",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "vid3d.get_UCF_classname",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.figure",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "find",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.subplot",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.axis",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "vid3d.video3d",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "os.path.join",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.imshow",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.title",
+      "type": "calls"
+    },
+    {
+      "from": "display.main",
+      "to": "plt.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "videoto3d",
+      "to": "cv2",
+      "type": "imports"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cv2.VideoCapture",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cap.get",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cap.set",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cap.read",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cv2.resize",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "framearray.append",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cv2.cvtColor",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "cap.release",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.video3d",
+      "to": "np.array",
+      "type": "calls"
+    },
+    {
+      "from": "videoto3d.Videoto3D.get_UCF_classname",
+      "to": "filename.find",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input",
+      "to": "argparse",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "numpy",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "matplotlib",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "matplotlib.pyplot",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "os",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "videoto3d",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "sklearn.cross_validation",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "tqdm",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.datasets",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.models",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.layers",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.utils",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras.utils.visualize_util",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input",
+      "to": "keras",
+      "type": "imports"
+    },
+    {
+      "from": "visualize_input.LearningRateAdaptor.__init__",
+      "to": "np.zeros",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.LearningRateAdaptor.rmsprop",
+      "to": "np.sqrt",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.LearningRateAdaptor.rmsprop",
+      "to": "K.epsilon",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.LearningRateAdaptor.adam",
+      "to": "np.sqrt",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.LearningRateAdaptor.adam",
+      "to": "K.epsilon",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "dict",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "len",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.mean",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.gradients",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.sqrt",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.square",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.epsilon",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.function",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.learning_phase",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "np.random.random",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "LearningRateAdaptor",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "K.int_shape",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "tqdm.tqdm",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "range",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "iterate",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "adaptor.adam",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "test_maximized",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "deprocess_image",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "save_figure",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.generateInputImage",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.deprocess_image",
+      "to": "x.mean",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.deprocess_image",
+      "to": "x.std",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.deprocess_image",
+      "to": "np.clip",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.deprocess_image",
+      "to": "np.clip.astype",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.test_maximized",
+      "to": "model.predict",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.test_maximized",
+      "to": "print",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.test_maximized",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.test_maximized",
+      "to": "np.argmax",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.test_maximized",
+      "to": "np.max",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "plt.figure",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "fig.add_subplot",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "ax.imshow",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "ax.axes.get_xaxis.set_visible",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "ax.axes.get_xaxis",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "ax.axes.get_yaxis.set_visible",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "ax.axes.get_yaxis",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "fig.savefig",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.save_figure",
+      "to": "format",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "argparse.ArgumentParser",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "parser.add_argument",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "parser.parse_args",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "open",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "keras.models.model_from_json",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "model_json.read",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "model.load_weights",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "model.summary",
+      "type": "calls"
+    },
+    {
+      "from": "visualize_input.main",
+      "to": "generateInputImage",
+      "type": "calls"
+    }
+  ],
+  "meta": {
+    "repo": "3DCNN",
+    "languages": [
+      "python"
+    ],
+    "generated_at": "2026-07-20T18:57:25.611606+00:00"
+  }
+}

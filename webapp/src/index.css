@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #080c16;
+  --surface: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.07);
+  --text: #e8e8f0;
+  --text-dim: #7a7e92;
+  --accent: #5352ed;
+  --accent-hover: #3742fa;
+  --success: #2ed573;
+  --danger: #ff4757;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+#root { height: 100%; }
+.app-container { display: flex; flex-direction: column; height: 100vh; }
+
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+/* Header */
+.glass-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 1.5rem;
+  background: rgba(8,12,22,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); z-index: 20;
+}
+.logo { display: flex; align-items: center; gap: 0.6rem; }
+.logo-icon { color: var(--accent); }
+.logo h1 { font-size: 1rem; font-weight: 700; letter-spacing: -0.5px; }
+.header-controls { display: flex; align-items: center; gap: 1rem; }
+.speed-control { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--text-dim); }
+.speed-control select {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--text); padding: 0.2rem 0.4rem; border-radius: 5px; font-size: 0.72rem; cursor: pointer;
+}
+.playback-controls { display: flex; gap: 0.25rem; }
+.btn-ctrl {
+  background: rgba(255,255,255,0.06); border: none; color: var(--text);
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.btn-ctrl:hover { background: rgba(255,255,255,0.12); }
+.btn-ctrl.play { background: var(--accent); }
+.btn-ctrl.play:hover { background: var(--accent-hover); }
+.btn-upload-new {
+  background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+  padding: 0.25rem 0.7rem; border-radius: 5px; font-size: 0.7rem; cursor: pointer; transition: all 0.15s;
+}
+.btn-upload-new:hover { border-color: var(--accent); color: var(--text); }
+
+/* Progress */
+.progress-bar-wrap { height: 3px; background: rgba(255,255,255,0.04); }
+.progress-bar {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--success));
+  transition: width 0.4s ease; border-radius: 0 2px 2px 0;
+}
+
+.main-content { flex: 1; display: flex; overflow: hidden; }
+
+/* Upload */
+.upload-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; padding: 2rem; }
+.dropzone {
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  padding: 3rem 2.5rem; border: 2px dashed var(--border); cursor: pointer;
+  transition: all 0.3s; max-width: 520px; width: 100%; text-align: center;
+}
+.dropzone.active, .dropzone:hover { border-color: var(--accent); background: rgba(83,82,237,0.03); }
+.upload-icon { color: var(--accent); transition: transform 0.3s; }
+.dropzone:hover .upload-icon { transform: translateY(-6px); }
+.dropzone h2 { font-size: 1.3rem; font-weight: 700; }
+.dropzone p { color: var(--text-dim); line-height: 1.4; font-size: 0.9rem; }
+.upload-sub { font-size: 0.8rem !important; color: #555 !important; }
+.btn-primary {
+  background: var(--accent); color: #fff; border: none;
+  padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.error-msg {
+  margin-top: 1rem; color: var(--danger); background: rgba(255,71,87,0.06);
+  padding: 0.5rem 0.8rem; border-radius: 6px; border: 1px solid rgba(255,71,87,0.15); font-size: 0.85rem;
+}
+
+/* Loading */
+.loading-screen {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin: auto; padding: 3rem; text-align: center; gap: 0.8rem;
+}
+.spinner { color: var(--accent); animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Visualizer */
+.visualizer-layout { display: flex; width: 100%; height: 100%; }
+.canvas-pane { flex: 1; height: 100%; overflow: auto; position: relative; }
+
+.cnn-canvas-container {
+  width: 100%; height: 100%; min-height: 400px;
+  background:
+    radial-gradient(at 20% 50%, rgba(83,82,237,0.05) 0, transparent 60%),
+    radial-gradient(at 80% 50%, rgba(46,213,115,0.04) 0, transparent 60%);
+}
+.cnn-canvas-container canvas { display: block; }
+
+/* Side Panel */
+.side-panel {
+  flex: 0 0 320px; border-radius: 0; border-left: 1px solid var(--border);
+  padding: 1.2rem; overflow-y: auto; background: rgba(8,12,22,0.7); backdrop-filter: blur(16px);
+}
+.side-panel h3 {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--text-dim); margin-bottom: 1rem;
+}
+.side-content { animation: fadeUp 0.3s ease-out; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.side-badge {
+  display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+  font-size: 0.65rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;
+}
+.side-content h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.side-type { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.8rem; }
+
+.side-shape, .side-math, .side-params {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.5rem 0.7rem; margin-bottom: 0.5rem;
+}
+.shape-label, .math-label, .params-label {
+  display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--text-dim); margin-bottom: 0.2rem;
+}
+.shape-value { font-size: 1rem; font-weight: 700; color: #70a1ff; }
+.side-math code {
+  display: block; font-size: 0.9rem; color: #ffd700; font-family: 'Fira Code', monospace;
+  padding: 0.2rem 0;
+}
+.side-params code {
+  display: block; font-size: 0.78rem; color: #7bed9f; font-family: 'Fira Code', monospace;
+}
+.side-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin-top: 0.8rem; }
+.side-empty { color: var(--text-dim); font-size: 0.82rem; }
