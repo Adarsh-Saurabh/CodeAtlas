@@ -1,0 +1,16 @@
+{
+  "node_ids": [
+    "helpers",
+    "helpers.double",
+    "main",
+    "main.Calculator",
+    "main.Calculator.total",
+    "main.run"
+  ],
+  "edges": [
+    ["main", "helpers", "imports"],
+    ["main.Calculator.total", "helpers.double", "calls"],
+    ["main.run", "Calculator", "calls"],
+    ["main.run", "Calculator.total", "calls"]
+  ]
+}

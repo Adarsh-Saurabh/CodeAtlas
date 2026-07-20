@@ -1,0 +1,95 @@
+{
+  "nodes": [
+    {
+      "id": "bottlenecks",
+      "type": "module",
+      "label": "bottlenecks",
+      "file": "bottlenecks.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "bottlenecks.slow"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "bottlenecks.slow",
+      "type": "function",
+      "label": "slow",
+      "file": "bottlenecks.py",
+      "line": 4,
+      "confidence": "high",
+      "children": [],
+      "calls": [
+        "time.sleep",
+        "db.find"
+      ],
+      "bottlenecks": [
+        {
+          "kind": "nested_loop",
+          "severity": "medium",
+          "detail": "Nested loop over records at line 6"
+        },
+        {
+          "kind": "blocking_io",
+          "severity": "high",
+          "detail": "time.sleep inside a loop at line 8"
+        },
+        {
+          "kind": "n_plus_one",
+          "severity": "medium",
+          "detail": "db.find inside a loop at line 9"
+        }
+      ]
+    },
+    {
+      "id": "clean",
+      "type": "module",
+      "label": "clean",
+      "file": "clean.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [
+        "clean.total"
+      ],
+      "calls": [],
+      "bottlenecks": []
+    },
+    {
+      "id": "clean.total",
+      "type": "function",
+      "label": "total",
+      "file": "clean.py",
+      "line": 1,
+      "confidence": "high",
+      "children": [],
+      "calls": [],
+      "bottlenecks": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "bottlenecks",
+      "to": "time",
+      "type": "imports"
+    },
+    {
+      "from": "bottlenecks.slow",
+      "to": "time.sleep",
+      "type": "calls"
+    },
+    {
+      "from": "bottlenecks.slow",
+      "to": "db.find",
+      "type": "calls"
+    }
+  ],
+  "meta": {
+    "repo": "sample_repo_with_bottlenecks",
+    "languages": [
+      "python"
+    ],
+    "generated_at": "2026-07-20T18:53:10.007898+00:00"
+  }
+}

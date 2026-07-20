@@ -1,0 +1,1 @@
+"""CodeAtlas static-analysis package."""
