@@ -2,3 +2,7 @@ __pycache__/
 .pytest_cache/
 graphify-out/
 *.pyc
+node_modules/
+webapp/
+graph.json
+frontend/*-graph.json

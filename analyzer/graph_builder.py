@@ -5,22 +5,33 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .bottleneck_rules import find_bottlenecks
+from .js_extractor import extract_js_file
 from .python_extractor import extract_python_file
+
+SKIP_DIRS = {"__pycache__", "node_modules", ".venv", "venv", "dist", "build"}
 
 
 def build_graph(repo: str | Path) -> dict:
     root = Path(repo).resolve()
     nodes, edges = [], []
-    for path in sorted(root.rglob("*.py")):
-        if any(part.startswith(".") or part == "__pycache__" for part in path.relative_to(root).parts):
+    languages = set()
+    for path in sorted(root.rglob("*")):
+        if not path.is_file() or path.suffix.lower() not in {".py", ".js", ".jsx", ".ts", ".tsx"}:
             continue
-        result = extract_python_file(path, root)
-        flags = find_bottlenecks(path, root)
-        for node in result["nodes"]:
-            node["bottlenecks"] = flags.get(node["id"], [])
+        if any(part.startswith(".") or part in SKIP_DIRS for part in path.relative_to(root).parts):
+            continue
+        if path.suffix.lower() == ".py":
+            languages.add("python")
+            result = extract_python_file(path, root)
+            flags = find_bottlenecks(path, root)
+            for node in result["nodes"]:
+                node["bottlenecks"] = flags.get(node["id"], [])
+        else:
+            languages.add("javascript" if path.suffix.lower() in {".js", ".jsx"} else "typescript")
+            result = extract_js_file(path, root)
         nodes.extend(result["nodes"])
         edges.extend(result["edges"])
-    return {"nodes": nodes, "edges": edges, "meta": {"repo": root.name, "languages": ["python"],
+    return {"nodes": nodes, "edges": edges, "meta": {"repo": root.name, "languages": sorted(languages),
             "generated_at": datetime.now(timezone.utc).isoformat()}}
 
 
@@ -41,6 +52,10 @@ def to_mermaid(graph: dict, expanded: set[str] | None = None) -> str:
     for node_id in ordered:
         node = nodes[node_id]
         lines.append(f'{aliases[node_id]}["{_escape(node["label"])}"]')
+        if node["confidence"] == "low":
+            lines.append(f"style {aliases[node_id]} fill:#f3f4f6,stroke:#94a3b8,stroke-dasharray: 5 5")
+        elif node["confidence"] == "medium":
+            lines.append(f"style {aliases[node_id]} fill:#f8fafc,stroke:#64748b,stroke-dasharray: 3 3")
         if node["bottlenecks"]:
             lines.append(f"style {aliases[node_id]} fill:#fff1f1,stroke:#dc2626,stroke-width:2px")
     for edge in graph["edges"]:

@@ -5,45 +5,120 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CodeAtlas</title>
   <style>
-    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f7f8fc; }
-    body { margin: 0; } main { max-width: 1100px; margin: auto; padding: 2rem; }
-    header { display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap; }
-    h1 { margin: 0; } p { color: #526075; } #diagram { background: white; border: 1px solid #dbe1eb; border-radius: 12px; min-height: 420px; padding: 1rem; overflow: auto; }
-    input, button { font: inherit; } button { background: #1e40af; border: 0; color: white; border-radius: 6px; padding: .55rem .8rem; cursor: pointer; }
-    #status { font-size: .9rem; } .legend { color: #b91c1c; }
+    :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #e8e8f0; background: #080c16; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 15% 0%, #24205a 0, transparent 32rem), #080c16; }
+    main { max-width: 1440px; margin: auto; padding: 1.25rem; }
+    header, .panel, .stat { background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem 1rem; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: 1.05rem; }
+    h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); max-width: 12ch; letter-spacing: -.05em; }
+    button, .upload { cursor: pointer; border: 0; border-radius: 7px; font: inherit; font-weight: 650; font-size: .85rem; }
+    .brand, .controls { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .mark { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9px; background: #5352ed; font-weight: 800; }
+    .upload, .control { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .8rem; color: white; background: #5352ed; }
+    .control { background: rgba(255,255,255,.08); }
+    .control:disabled { opacity: .45; cursor: not-allowed; }
+    input { display: none; }
+    .muted { color: #9ea3b9; line-height: 1.5; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, .7fr); gap: 1.25rem; align-items: center; padding: 3.5rem 0 2rem; }
+    .hero p { margin-top: 1rem; max-width: 54ch; }
+    .panel { padding: 1.25rem; }
+    .dropzone { min-height: 180px; display: grid; place-items: center; width: 100%; color: inherit; text-align: center; border: 2px dashed rgba(130,125,255,.35); background: rgba(83,82,237,.08); }
+    .dropzone:hover, .dropzone.active { border-color: #8c8aff; background: rgba(83,82,237,.15); }
+    .dropzone strong { display: block; margin-bottom: .4rem; }
+    .dropzone .upload { margin-top: 1rem; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 0 0 1.25rem; }
+    .stat { padding: .85rem 1rem; }
+    .stat span { display: block; color: #8b90a7; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+    .stat strong { display: block; margin-top: .2rem; font-size: 1.35rem; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 1.25rem; }
+    #diagram { min-height: 520px; overflow: hidden; padding: 1rem; cursor: grab; touch-action: none; background: radial-gradient(circle at 50% 50%, rgba(83,82,237,.08), transparent 55%), #0b101d; }
+    #diagram:active { cursor: grabbing; }
+    #diagram svg { transform-origin: 0 0; }
+    .side h3 { margin: 0 0 .75rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: #9ea3b9; }
+    #details { font-size: .9rem; }
+    #details strong { display: block; font-size: 1.1rem; color: #fff; margin-bottom: .25rem; }
+    #details code { color: #a6f3c4; word-break: break-word; }
+    .legend { color: #ff8790; font-size: .8rem; }
+    @media (max-width: 720px) { main { padding: .75rem; } .hero, .workspace, .stats { grid-template-columns: 1fr; } .hero { padding-top: 2rem; } .side { order: -1; } }
   </style>
 </head>
 <body>
   <main>
-    <header><div><h1>CodeAtlas</h1><p>Click a node to expand or collapse its direct children.</p></div><input id="file" type="file" accept="application/json"></header>
-    <p id="status">Loading <code>graph.json</code>… <span class="legend">Red outline = bottleneck heuristic.</span></p>
-    <div id="diagram" aria-label="Code architecture diagram"></div>
+    <header>
+      <div class="brand"><span class="mark">*</span><h1>CodeAtlas</h1></div>
+      <div class="controls">
+        <button class="control" id="all" disabled>Show all connections</button>
+        <button class="control" id="reset" disabled>Reset view</button>
+        <label class="upload">Open project<input id="file" type="file" accept=".zip,application/zip,application/json"></label>
+      </div>
+    </header>
+    <section class="hero">
+      <div><h2>See the shape of a codebase.</h2><p class="muted">Upload a Python/JS/TS project ZIP or a generated graph.json. Low-confidence heuristic nodes are visibly muted instead of pretending to be certain.</p></div>
+      <button class="panel dropzone" id="dropzone" type="button"><span><strong id="upload-status">Upload a project ZIP or graph.json</strong><span class="muted">ZIP analysis needs the local server; graph.json works on static hosting.</span><span class="upload">Choose file</span></span></button>
+    </section>
+    <section class="stats"><div class="stat"><span>Repository</span><strong id="repo">Loading</strong></div><div class="stat"><span>Nodes</span><strong id="node-count">-</strong></div><div class="stat"><span>Heuristics</span><strong id="risk-count">-</strong></div></section>
+    <section class="workspace"><div id="diagram" class="panel" aria-label="Code architecture diagram"></div><aside class="panel side"><h3>Inspector</h3><div id="details" class="muted">Select a node in the map to inspect it.<br><br><span class="legend">Red = bottleneck. Dashed = heuristic/low confidence.</span></div></aside></section>
   </main>
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "base", themeVariables: { primaryColor: "#e8eefc", primaryBorderColor: "#1e40af", lineColor: "#64748b" } });
-    const diagram = document.querySelector("#diagram"), status = document.querySelector("#status"), expanded = new Set();
-    let graph, nodes, aliases;
-    const escape = value => String(value).replace(/["\[\]]/g, " ");
+    mermaid.initialize({ startOnLoad: false, securityLevel: "loose", theme: "base", themeVariables: { primaryColor: "#151b31", primaryTextColor: "#e8e8f0", primaryBorderColor: "#7774ff", lineColor: "#7f86a6", tertiaryColor: "#0b101d" } });
+    const $ = s => document.querySelector(s), diagram = $("#diagram"), details = $("#details"), expanded = new Set();
+    let graph, nodes, aliases, showAll = false, zoom = 1, pan = { x: 0, y: 0 }, dragStart;
+    const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const mermaidText = value => String(value ?? "").replace(/["\[\]]/g, " ");
+    const tooltip = node => node.bottlenecks?.length ? node.bottlenecks.map(item => item.detail).join("; ") : `${node.type}, ${node.confidence} confidence`;
     const source = () => {
-      const visible = new Set([...nodes.values()].filter(n => n.type === "module").map(n => n.id));
-      expanded.forEach(id => (nodes.get(id)?.children || []).forEach(child => visible.add(child)));
-      const ids = [...visible].sort(); aliases = new Map(ids.map((id, index) => [id, `n${index}`]));
+      const visible = showAll ? new Set(nodes.keys()) : new Set([...nodes.values()].filter(n => n.type === "module").map(n => n.id));
+      if (!showAll) expanded.forEach(id => (nodes.get(id)?.children || []).forEach(child => visible.add(child)));
+      const ids = [...visible].sort(); aliases = new Map(ids.map((id, i) => [id, `n${i}`]));
       const lines = ["flowchart TD"];
-      ids.forEach(id => { const n = nodes.get(id); lines.push(`${aliases.get(id)}["${escape(n.label)}"]`); if (n.bottlenecks.length) lines.push(`style ${aliases.get(id)} fill:#fff1f1,stroke:#dc2626,stroke-width:2px`); lines.push(`click ${aliases.get(id)} toggleNode "Expand or collapse"`); });
+      ids.forEach(id => {
+        const node = nodes.get(id), alias = aliases.get(id);
+        lines.push(`${alias}["${mermaidText(node.label)}"]`);
+        if (node.confidence === "low") lines.push(`style ${alias} fill:#202737,stroke:#94a3b8,stroke-dasharray: 5 5`);
+        if (node.confidence === "medium") lines.push(`style ${alias} fill:#172033,stroke:#94a3b8,stroke-dasharray: 3 3`);
+        if (node.bottlenecks?.length) lines.push(`style ${alias} fill:#301c29,stroke:#ff5364,stroke-width:2px`);
+        lines.push(`click ${alias} inspectNode "${mermaidText(tooltip(node))}"`);
+      });
       ids.forEach(id => (nodes.get(id).children || []).filter(child => aliases.has(child)).forEach(child => lines.push(`${aliases.get(id)} --> ${aliases.get(child)}`)));
       graph.edges.filter(edge => aliases.has(edge.from) && aliases.has(edge.to)).forEach(edge => lines.push(`${aliases.get(edge.from)} -. ${edge.type} .-> ${aliases.get(edge.to)}`));
       return lines.join("\n");
     };
-    const render = async () => {
-      const result = await mermaid.render("codeatlas", source()); diagram.innerHTML = result.svg; result.bindFunctions?.(diagram);
-      status.firstChild.textContent = `${graph.meta.repo}: ${nodes.size} nodes. `;
+    const applyView = () => { const svg = diagram.querySelector("svg"); if (svg) svg.style.transform = `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`; };
+    const render = async () => { const result = await mermaid.render("codeatlas", source()); diagram.innerHTML = result.svg; result.bindFunctions?.(diagram); applyView(); };
+    window.inspectNode = alias => {
+      const id = [...aliases.entries()].find(([, value]) => value === alias)?.[0], node = nodes.get(id); if (!node) return;
+      const risks = node.bottlenecks?.map(item => `<li>${safe(item.detail)}</li>`).join("") || "<li>No heuristic findings.</li>";
+      details.innerHTML = `<strong>${safe(node.label)}</strong><p>${safe(node.type)} · ${safe(node.confidence)} confidence<br>${safe(node.file || "external")}:${safe(node.line || "-")}</p><p>Calls: <code>${safe(node.calls?.join(", ") || "none")}</code></p><ul>${risks}</ul>`;
+      if (!showAll) { expanded.has(id) ? expanded.delete(id) : expanded.add(id); render(); }
     };
-    window.toggleNode = id => { const node = [...aliases.entries()].find(([, alias]) => alias === id)?.[0]; if (!node) return; expanded.has(node) ? expanded.delete(node) : expanded.add(node); render(); };
-    const load = async data => { graph = JSON.parse(data); nodes = new Map(graph.nodes.map(node => [node.id, node])); await render(); };
-    document.querySelector("#file").addEventListener("change", event => event.target.files[0]?.text().then(load));
-    const graphFile = new URLSearchParams(location.search).get("graph") || "graph.json";
-    fetch(graphFile).then(response => response.ok ? response.text() : Promise.reject()).then(load).catch(() => { status.firstChild.textContent = "Choose a generated graph.json to view it. "; });
+    const load = async text => {
+      graph = JSON.parse(text); nodes = new Map(graph.nodes.map(node => [node.id, node]));
+      const risks = graph.nodes.reduce((count, node) => count + (node.bottlenecks?.length || 0), 0);
+      showAll = false; zoom = 1; pan = { x: 0, y: 0 }; $("#all").disabled = $("#reset").disabled = false; $("#all").textContent = "Show all connections";
+      $("#repo").textContent = graph.meta.repo; $("#node-count").textContent = nodes.size; $("#risk-count").textContent = risks; await render();
+    };
+    const loadFile = file => file?.name.toLowerCase().endsWith(".zip") ? analyzeZip(file) : file?.text().then(load).catch(() => { details.textContent = "That file is not a valid CodeAtlas graph."; });
+    const analyzeZip = async file => {
+      $("#upload-status").textContent = "Analyzing project..."; details.textContent = "Reading source files and building your architecture map...";
+      try { const form = new FormData(); form.append("file", file); const result = await fetch("/api/analyze", { method: "POST", body: form }); const data = await result.json().catch(() => ({})); if (!result.ok) throw Error(data.error || "Run `python server.py` locally for ZIP analysis, or upload graph.json on static hosting."); await load(JSON.stringify(data)); }
+      catch (error) { details.textContent = error.message || "Analysis failed."; } finally { $("#upload-status").textContent = "Upload a project ZIP or graph.json"; }
+    };
+    $("#file").addEventListener("change", event => loadFile(event.target.files[0]));
+    const dropzone = $("#dropzone"); dropzone.addEventListener("click", () => $("#file").click());
+    ["dragenter", "dragover"].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.add("active"); }));
+    ["dragleave", "drop"].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.remove("active"); }));
+    dropzone.addEventListener("drop", event => loadFile(event.dataTransfer.files[0]));
+    $("#all").addEventListener("click", () => { showAll = !showAll; $("#all").textContent = showAll ? "Show summary" : "Show all connections"; render(); });
+    $("#reset").addEventListener("click", () => { zoom = 1; pan = { x: 0, y: 0 }; applyView(); });
+    diagram.addEventListener("wheel", event => { if (!diagram.querySelector("svg")) return; event.preventDefault(); zoom = Math.max(.3, Math.min(3, zoom * (event.deltaY < 0 ? 1.12 : .88))); applyView(); });
+    diagram.addEventListener("pointerdown", event => { if (event.target.closest(".node")) return; dragStart = { x: event.clientX - pan.x, y: event.clientY - pan.y }; diagram.setPointerCapture(event.pointerId); });
+    diagram.addEventListener("pointermove", event => { if (!dragStart) return; pan = { x: event.clientX - dragStart.x, y: event.clientY - dragStart.y }; applyView(); });
+    diagram.addEventListener("pointerup", () => { dragStart = null; });
+    fetch(new URLSearchParams(location.search).get("graph") || "graph.json").then(r => r.ok ? r.text() : Promise.reject()).then(load).catch(() => { $("#repo").textContent = "Choose a graph"; });
   </script>
 </body>
 </html>

@@ -24,6 +24,26 @@ def call_name(node: ast.AST) -> str:
     return ""
 
 
+def route_decorators(node: ast.FunctionDef) -> list[tuple[str, str]]:
+    routes = []
+    for decorator in node.decorator_list:
+        if not isinstance(decorator, ast.Call):
+            continue
+        name = call_name(decorator.func)
+        method = name.rsplit(".", 1)[-1].upper()
+        if method == "ROUTE":
+            method = "HTTP"
+            for keyword in decorator.keywords:
+                if keyword.arg == "methods" and isinstance(keyword.value, (ast.List, ast.Tuple)):
+                    methods = [item.value for item in keyword.value.elts if isinstance(item, ast.Constant)]
+                    method = "/".join(str(item).upper() for item in methods) or method
+        if method not in {"GET", "POST", "PUT", "PATCH", "DELETE", "HTTP"}:
+            continue
+        if decorator.args and isinstance(decorator.args[0], ast.Constant):
+            routes.append((method, str(decorator.args[0].value)))
+    return routes
+
+
 class Extractor(ast.NodeVisitor):
     def __init__(self, path: Path, root: Path):
         self.path, self.root = path, root
@@ -56,7 +76,12 @@ class Extractor(ast.NodeVisitor):
 
     def _function(self, node: ast.FunctionDef) -> None:
         node_id = f"{self.stack[-1]}.{node.name}"
-        self.add_child(self.node(node_id, "function", node.name, node.lineno))
+        function_node = self.node(node_id, "function", node.name, node.lineno)
+        self.add_child(function_node)
+        for method, path in route_decorators(node):
+            endpoint_id = f"{node_id}:{method}:{path}"
+            self.add_child(self.node(endpoint_id, "endpoint", f"{method} {path}", node.lineno))
+            self.edges.append({"from": endpoint_id, "to": node_id, "type": "routes_to"})
         self.stack.append(node_id)
         self.generic_visit(node)
         self.stack.pop()
